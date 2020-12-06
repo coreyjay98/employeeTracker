@@ -1,0 +1,19 @@
+1 set up database //DONE
+
+2 sort prompt questions for inquirer 
+
+Add departments, roles, employees
+
+View departments, roles, employees
+
+Update employee roles
+
+name 
+role
+manager
+
+
+
+3 wire up sql queries to align with inquirer inputs  
+
+4 console table to display queries
