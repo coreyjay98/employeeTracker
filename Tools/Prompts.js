@@ -1,20 +1,33 @@
 const inquirer = require("inquirer");
-const { viewDepartments } = require("./Queries");
+const { viewDb, viewAllEmployees } = require("./Queries");
 const { initialPrompt } = require("./Questions");
+const cTable = require("console.table");
 
 const initPrompt = () => {
   inquirer
     .prompt(initialPrompt)
     .then((answer) => {
       switch (answer.start) {
-        case "View Departments":
-          viewDepartments();
+        case "View All Employees by Department":
+          viewDb("department")
+            .then(function (data) {
+              console.table(data);
+            })
+            .catch((err) => console.log(err));
           break;
-        case "View Roles":
-          viewRoles();
+        case "View All Employees by Roles":
+          viewDb("role")
+            .then(function (data) {
+              console.table(data);
+            })
+            .catch((err) => console.log(err));
           break;
-        case "View Employees":
-          viewEmployees();
+        case "View All Employees":
+          viewAllEmployees("employee")
+            .then(function (data) {
+              console.table(data);
+            })
+            .catch((err) => console.log(err));
           break;
         case "Add Departments":
           addDepartments();

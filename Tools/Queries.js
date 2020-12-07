@@ -7,16 +7,28 @@ const connection = mysql.createConnection({
   database: "employeeDatabase",
 });
 
-const viewDepartments = function () {
+const viewAllEmployees = function (filter) {
   return new Promise(function (resolve, reject) {
-    connection.query("SELECT * FROM department", function (err, res) {
+    connection.query(`SELECT * FROM ${filter}`, function (err, res) {
       if (err) {
         reject(new Error(err));
       } else {
-        console.log(res);
-        resolve();
+        resolve(res);
       }
     });
   });
 };
-module.exports = { viewDepartments: viewDepartments };
+
+const viewDb = function (filter) {
+  return new Promise(function (resolve, reject) {
+    connection.query(`SELECT * FROM ${filter}`, function (err, res) {
+      if (err) {
+        reject(new Error(err));
+      } else {
+        resolve(res);
+      }
+    });
+  });
+};
+
+module.exports = { viewAllEmployees: viewAllEmployees, viewDb: viewDb };

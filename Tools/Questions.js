@@ -6,9 +6,9 @@ const initialPrompt = [
     name: "start",
     message: "What operation do you require?",
     choices: [
-      "View Departments",
-      "View Roles",
-      "View Employees",
+      "View All Employees by Department",
+      "View All Employees by Roles",
+      "View All Employees",
       "Add Roles",
       "Add Employee",
     ],
@@ -27,9 +27,31 @@ const employeePrompts = [
     message: "What is your second Name?",
   },
   {
-    type: "input",
+    type: "list",
     name: "role",
     message: "What is your role at the Company?",
+    choices: [
+      "Sales Lead",
+      "Sales Person",
+      "Senior Engineer",
+      "Junior Engineer",
+      "Account Manager",
+      "Accountant",
+      "Lawyer",
+      "Legal Team",
+    ],
+  },
+  {
+    type: "list",
+    name: "role",
+    message: "Who is your Manager?",
+    choices: [
+      "None",
+      "Lisa Hawtin",
+      "Corey Samuels",
+      "Ethan Johnson",
+      "Louis Cogez",
+    ],
   },
 ];
 
