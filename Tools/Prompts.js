@@ -4,6 +4,7 @@ const { initialPrompt, resetPrompt } = require("./Questions");
 const cTable = require("console.table");
 const { employeeInquire } = require("./Employee");
 const departmentInquire = require("./Department");
+const { roleInquire } = require("./Roles");
 
 const initPrompt = () => {
   inquirer
@@ -49,7 +50,10 @@ const initPrompt = () => {
           });
           break;
         case "Add Roles":
-          addRoles();
+          roleInquire().then(() => {
+            console.log("Role Added");
+            return restartQuestion();
+          });
           break;
         case "Add Employee":
           employeeInquire().then(() => {

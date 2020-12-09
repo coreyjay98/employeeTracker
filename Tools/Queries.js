@@ -70,9 +70,25 @@ const addDepartment = function (result) {
   });
 };
 
+const addRole = function (result) {
+  return new Promise(function (resolve, reject) {
+    connection.query(
+      `INSERT INTO role (title,salary,departmentID) VALUES ('${result.name}','${result.salary}',${result.departmentID});`,
+      function (err, res) {
+        if (err) {
+          reject(new Error(err));
+        } else {
+          resolve(res);
+        }
+      }
+    );
+  });
+};
+
 module.exports = {
   viewAllEmployees: viewAllEmployees,
   viewDb: viewDb,
   addEmployees: addEmployees,
   addDepartment: addDepartment,
+  addRole: addRole,
 };
