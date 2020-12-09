@@ -5,9 +5,10 @@ const { addDepartment } = require("./Queries");
 const { restartFromEmployees } = require("./Employee");
 
 const departmentInquire = () => {
-  inquirer.prompt(departmentPrompts).then((data) => {
-    addDepartment(data);
-    return restartFromEmployees();
+  return new Promise(function (resolve, reject) {
+    inquirer.prompt(departmentPrompts).then((data) => {
+      resolve(addDepartment(data));
+    });
   });
 };
 

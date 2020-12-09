@@ -50,7 +50,7 @@ const employeePrompts = [
     name: "manager",
     message: "Who is your Manager?",
     choices: [
-      "None",
+      { name: "None", value: null, short: "None" },
       { name: "Lisa Hawtin", value: 1, short: "Lisa Hawtin" },
       { name: "Corey Samuels", value: 3, short: "Corey Samuels" },
       { name: "Ethan Johnson", value: 5, short: "Ethan Johnson" },

@@ -43,12 +43,20 @@ const initPrompt = () => {
             .catch((err) => console.log(err));
           break;
         case "Add Departments":
-          return departmentInquire();
+          departmentInquire().then(() => {
+            console.log("Department Added");
+            return restartQuestion();
+          });
+          break;
         case "Add Roles":
           addRoles();
           break;
         case "Add Employee":
-          return employeeInquire();
+          employeeInquire().then(() => {
+            console.log("Employee Added");
+            return restartQuestion();
+          });
+          break;
       }
     })
     .catch((err) => console.log("inq error", err));

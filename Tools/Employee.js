@@ -4,9 +4,10 @@ const { employeePrompts, resetPrompt } = require("./Questions");
 const initPrompt = require("./Prompts");
 
 const employeeInquire = () => {
-  inquirer.prompt(employeePrompts).then((data) => {
-    addEmployees(data);
-    restartFromEmployees();
+  return new Promise(function (resolve, reject) {
+    inquirer.prompt(employeePrompts).then((data) => {
+      resolve(addEmployees(data));
+    });
   });
 };
 
