@@ -26,25 +26,45 @@ FOREIGN KEY (roleID) REFERENCES role(id)
 );
 
 
-INSERT INTO department (name) VALUES ('Sales');
-INSERT INTO department (name) VALUES ('Engineering');
-INSERT INTO department (name) VALUES ('Finance');
-INSERT INTO department (name) VALUES ('Legal');
+INSERT INTO department (name) VALUES ('Sales'); -- 1
+INSERT INTO department (name) VALUES ('Engineering'); -- 2
+INSERT INTO department (name) VALUES ('Finance'); -- 3
+INSERT INTO department (name) VALUES ('Legal'); -- 4
 
-INSERT INTO role (title,salary,departmentID) VALUES ('Sales Lead',50000,1);
-INSERT INTO role (title,salary,departmentID) VALUES ('Sales Person',25000,1);
-INSERT INTO role (title,salary,departmentID) VALUES ('Senior Engineer',60000,2);
-INSERT INTO role (title,salary,departmentID) VALUES ('Junior Engineer',30000,2);
-INSERT INTO role (title,salary,departmentID) VALUES ('Account Manager',70000,3);
-INSERT INTO role (title,salary,departmentID) VALUES ('Accountant',50000,3);
-INSERT INTO role (title,salary,departmentID) VALUES ('Lawyer',70000,4);
-INSERT INTO role (title,salary,departmentID) VALUES ('Legal Team',30000,4);
+INSERT INTO role (title,salary,departmentID) VALUES ('Sales Lead',50000,1); -- 1
+INSERT INTO role (title,salary,departmentID) VALUES ('Sales Person',25000,1); -- 2
+INSERT INTO role (title,salary,departmentID) VALUES ('Senior Engineer',60000,2); -- 3
+INSERT INTO role (title,salary,departmentID) VALUES ('Junior Engineer',30000,2); -- 4
+INSERT INTO role (title,salary,departmentID) VALUES ('Account Manager',70000,3); -- 5
+INSERT INTO role (title,salary,departmentID) VALUES ('Accountant',50000,3); -- 6
+INSERT INTO role (title,salary,departmentID) VALUES ('Lawyer',70000,4); -- 7
+INSERT INTO role (title,salary,departmentID) VALUES ('Legal Team',30000,4); -- 8
 
 INSERT INTO employee (firstName,lastName,roleID,managerID)
-VALUES ('Lisa','Hawtin',1,1);
+VALUES ('Lisa','Hawtin',1,NULL);
 INSERT INTO employee (firstName,lastName,roleID,managerID)
-VALUES ('Corey','Samuels',3,2);
+VALUES ('Corey','Samuels',3,NULL);
 INSERT INTO employee (firstName,lastName,roleID,managerID)
-VALUES ('Ethan','Johnson',5,3);
+VALUES ('Ethan','Johnson',5,NULL);
 INSERT INTO employee (firstName,lastName,roleID,managerID)
-VALUES ('Louis','Cogez',7,4);
+VALUES ('Louis','Cogez',7,NULL);
+
+INSERT INTO employee (firstName,lastName,roleID,managerID)
+VALUES ('Kyle','Dhaliwal',2,1);
+INSERT INTO employee (firstName,lastName,roleID,managerID)
+VALUES ('Kai','Stuart',4,3);
+INSERT INTO employee (firstName,lastName,roleID,managerID)
+VALUES ('Jamie','McGrath',6,5);
+INSERT INTO employee (firstName,lastName,roleID,managerID)
+VALUES ('Reece','Mitchell',8,7);
+INSERT INTO employee (firstName,lastName,roleID,managerID)
+VALUES ('Kariss','Rowe',4,3);
+INSERT INTO employee (firstName,lastName,roleID,managerID)
+VALUES ('Keaton','Amory',4,3);
+
+SELECT role.id,employee.firstName,
+employee.lastName,department.name,role.title,role.salary,employee.managerID
+from department
+inner join role on departmentID = department.id
+inner join employee on roleID = role.id
+order by id;

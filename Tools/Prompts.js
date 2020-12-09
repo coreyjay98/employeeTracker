@@ -1,7 +1,9 @@
 const inquirer = require("inquirer");
 const { viewDb, viewAllEmployees } = require("./Queries");
-const { initialPrompt } = require("./Questions");
+const { initialPrompt, resetPrompt } = require("./Questions");
 const cTable = require("console.table");
+const { employeeInquire } = require("./Employee");
+const departmentInquire = require("./Department");
 
 const initPrompt = () => {
   inquirer
@@ -12,13 +14,15 @@ const initPrompt = () => {
           viewDb("department")
             .then(function (data) {
               console.table(data);
+              return restartQuestion();
             })
             .catch((err) => console.log(err));
           break;
-        case "View All Employees by Roles":
-          viewDb("role")
+        case "View All Roles":
+          viewAllEmployees("role")
             .then(function (data) {
               console.table(data);
+              return restartQuestion();
             })
             .catch((err) => console.log(err));
           break;
@@ -26,21 +30,54 @@ const initPrompt = () => {
           viewAllEmployees("employee")
             .then(function (data) {
               console.table(data);
+              return restartQuestion();
+            })
+            .catch((err) => console.log(err));
+          break;
+        case "View Departments":
+          viewAllEmployees("department")
+            .then(function (data) {
+              console.table(data);
+              return restartQuestion();
             })
             .catch((err) => console.log(err));
           break;
         case "Add Departments":
-          addDepartments();
-          break;
+          return departmentInquire();
         case "Add Roles":
           addRoles();
           break;
         case "Add Employee":
-          addEmployee();
-          break;
+          return employeeInquire();
       }
     })
     .catch((err) => console.log("inq error", err));
 };
 
-module.exports = initPrompt;
+const restartQuestion = () => {
+  inquirer.prompt(resetPrompt).then((answer) => {
+    if (answer.restart == "Yes") {
+      initPrompt();
+    } else {
+      console.log("GoodBye");
+    }
+  });
+};
+
+const managerFilter = (data) => {
+  data.forEach(({ managerID }) => {
+    switch (managerID) {
+      case 1:
+        managerID = "Lisa";
+        break;
+      case 3:
+        return "Corey Samuels";
+      case 5:
+        return "Ethan Johnson";
+      case 7:
+        return "Louis Cogez";
+    }
+  });
+};
+
+module.exports = { initPrompt: initPrompt, restartQuestion: restartQuestion };
