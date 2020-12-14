@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-const { viewDb, viewAllEmployees } = require("./Queries");
+const { viewDb, viewAllEmployees, connection } = require("./Queries");
 const { initialPrompt, resetPrompt } = require("./Questions");
 const cTable = require("console.table");
 const { employeeInquire } = require("./Employee");
@@ -12,7 +12,7 @@ const initPrompt = () => {
     .then((answer) => {
       switch (answer.start) {
         case "View All Employees by Department":
-          viewDb("department")
+          viewDb()
             .then(function (data) {
               console.table(data);
               return restartQuestion();
@@ -72,22 +72,7 @@ const restartQuestion = () => {
       initPrompt();
     } else {
       console.log("GoodBye");
-    }
-  });
-};
-
-const managerFilter = (data) => {
-  data.forEach(({ managerID }) => {
-    switch (managerID) {
-      case 1:
-        managerID = "Lisa";
-        break;
-      case 3:
-        return "Corey Samuels";
-      case 5:
-        return "Ethan Johnson";
-      case 7:
-        return "Louis Cogez";
+      connection.end();
     }
   });
 };

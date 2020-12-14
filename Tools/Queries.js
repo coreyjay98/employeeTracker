@@ -21,7 +21,7 @@ const viewAllEmployees = function (filter) {
   });
 };
 
-const viewDb = function (filter) {
+const viewDb = function () {
   return new Promise(function (resolve, reject) {
     connection.query(
       `SELECT role.id,employee.firstName,
@@ -93,4 +93,5 @@ module.exports = {
   addEmployees: addEmployees,
   addDepartment: addDepartment,
   addRole: addRole,
+  connection: connection,
 };
